@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>{% block title %}Chat App{% endblock %}</title>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+
+    <!-- Custom Dark Red Theme -->
+    <style>
+      body, html {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: #0f172a;
+        color: #f1f5f9;
+        font-family: 'Segoe UI', Roboto, sans-serif;
+      }
+
+      a {
+        color: #f87171;
+        transition: color 0.2s ease;
+      }
+
+      a:hover {
+        color: #fff;
+        text-decoration: underline;
+      }
+
+      .navbar {
+        background-color: #1f2937;
+        border-bottom: 1px solid #334155;
+      }
+
+      .navbar-brand {
+        color: #ef4444 !important;
+        font-weight: bold;
+      }
+
+      .nav-link {
+        color: #f1f5f9 !important;
+        margin-left: 12px;
+      }
+
+      .nav-link:hover {
+        color: #ef4444 !important;
+      }
+
+      .btn-primary {
+        background-color: #ef4444;
+        border: none;
+        transition: background 0.3s ease;
+      }
+
+      .btn-primary:hover {
+        background-color: #dc2626;
+      }
+
+      .form-control {
+        background-color: #1e293b;
+        color: #f1f5f9;
+        border: 1px solid #334155;
+      }
+
+      .form-control:focus {
+        background-color: #0f172a;
+        color: #fff;
+        border-color: #ef4444;
+        box-shadow: 0 0 0 0.2rem rgba(239, 68, 68, 0.25);
+      }
+
+      .content-wrapper {
+        padding: 24px;
+      }
+
+      footer {
+        background-color: #1f2937;
+        color: #9ca3af;
+        text-align: center;
+        padding: 12px;
+        font-size: 0.85rem;
+      }
+    </style>
+
+    {% block styles %}{% endblock %}
+  </head>
+
+  <body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <a class="navbar-brand" href="#">Kortex</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+        <ul class="navbar-nav">
+          {% if user.is_authenticated %}
+            <li class="nav-item">
+              <a  class="navbar-brand" href="#">Welcome, {{ user.username }}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'login' %}">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'register' %}">Register</a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container-fluid content-wrapper">
+      {% block content %}{% endblock %}
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      © {{ now|date:"Y" }} Chat App • Built with ❤️ by You
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    {% block scripts %}{% endblock %}
+  </body>
+</html>
